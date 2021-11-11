@@ -1,0 +1,11 @@
+.footerAppBar a{
+    text-decoration: none;
+    color: white;
+}
+.footerAppBar{
+    padding-top: 3%;
+    
+}
+.footerAppBar .bottomFooter{
+    padding-top: 2%;
+}
