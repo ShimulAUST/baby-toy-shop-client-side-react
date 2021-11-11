@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, Rating, Typography } from '@mui/material';
+import { Card, CardContent, Rating, Typography } from '@mui/material';
 import React from 'react';
 
 const Review = ({ review }) => {

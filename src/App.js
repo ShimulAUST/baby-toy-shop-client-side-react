@@ -11,7 +11,6 @@ import AuthProvider from './context/AuthProvider/AuthProvider';
 import Register from './pages/Login/Register/Register';
 import ExploreShop from './pages/ExploreShop/ExploreShop';
 import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
-import Reviews from './pages/Home/Reviews/Reviews';
 import AddReviews from './pages/Home/AddReviews/AddReviews';
 function App() {
   return (
