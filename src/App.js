@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Login from './pages/Login/Login/Login';
 import AuthProvider from './context/AuthProvider/AuthProvider';
 import Register from './pages/Login/Register/Register';
+import ExploreShop from './pages/ExploreShop/ExploreShop';
 function App() {
   return (
     <div className="App">
@@ -27,6 +28,9 @@ function App() {
             </Route>
             <Route exact path="/register">
               <Register></Register>
+            </Route>
+            <Route exact path="/exploreShop">
+              <ExploreShop></ExploreShop>
             </Route>
             <Route exact path="*">
               <NotFound></NotFound>

@@ -45,6 +45,7 @@ const Navigation = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Baby Toys Shop
                     </Typography>
+                    <NavLink style={{ textDecoration: "none", color: 'white' }} to="/exploreShop"><Button color="inherit">Explore Shop</Button></NavLink>
                     {
                         user?.email ?
                             <Box>
