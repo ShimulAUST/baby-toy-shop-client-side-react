@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -15,9 +15,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { Dashboard } from '@mui/icons-material';
+import { Dashboard, Payment, Reviews } from '@mui/icons-material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const Navigation = () => {
     const { user, logout } = useAuth();
@@ -43,7 +42,7 @@ const Navigation = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Baby Toys Shop
+                        <NavLink style={{ textDecoration: "none", color: 'white' }} to="/"><Button color="inherit">Baby Toys Shop</Button></NavLink>
                     </Typography>
                     <NavLink style={{ textDecoration: "none", color: 'white' }} to="/exploreShop"><Button color="inherit">Explore Shop</Button></NavLink>
                     {
@@ -92,10 +91,16 @@ const Navigation = () => {
                                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                 >
                                     <MenuItem>
-                                        <Dashboard />  Dashboard
+                                        <ListItemIcon>
+                                            <Dashboard fontSize="small" />
+                                        </ListItemIcon>
+                                        Dashboard
                                     </MenuItem>
                                     <MenuItem>
-                                        <AddShoppingCartIcon />  My Orders
+                                        <ListItemIcon>
+                                            <AddShoppingCartIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        My Orders
                                     </MenuItem>
                                     <Divider />
                                     <MenuItem>
@@ -106,9 +111,15 @@ const Navigation = () => {
                                     </MenuItem>
                                     <MenuItem>
                                         <ListItemIcon>
-                                            <Settings fontSize="small" />
+                                            <Payment fontSize="small" />
                                         </ListItemIcon>
-                                        Settings
+                                        Payment
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <ListItemIcon>
+                                            <Reviews fontSize="small" />
+                                        </ListItemIcon>
+                                        <Link to='/addReviews'> Add Review</Link>
                                     </MenuItem>
                                     <MenuItem onClick={logout}>
                                         <ListItemIcon>

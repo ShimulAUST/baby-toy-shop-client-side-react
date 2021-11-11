@@ -2,8 +2,7 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Home from './pages/Home/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
@@ -11,6 +10,9 @@ import Login from './pages/Login/Login/Login';
 import AuthProvider from './context/AuthProvider/AuthProvider';
 import Register from './pages/Login/Register/Register';
 import ExploreShop from './pages/ExploreShop/ExploreShop';
+import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
+import Reviews from './pages/Home/Reviews/Reviews';
+import AddReviews from './pages/Home/AddReviews/AddReviews';
 function App() {
   return (
     <div className="App">
@@ -32,6 +34,9 @@ function App() {
             <Route exact path="/exploreShop">
               <ExploreShop></ExploreShop>
             </Route>
+            <PrivateRoute exact path="/addReviews">
+              <AddReviews></AddReviews>
+            </PrivateRoute>
             <Route exact path="*">
               <NotFound></NotFound>
             </Route>

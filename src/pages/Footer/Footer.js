@@ -1,4 +1,4 @@
-import { AppBar, Container, Divider, Grid, Toolbar, Typography } from '@mui/material';
+import { AppBar, Container, Divider, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
