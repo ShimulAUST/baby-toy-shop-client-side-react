@@ -12,6 +12,7 @@ import Register from './pages/Login/Register/Register';
 import ExploreShop from './pages/ExploreShop/ExploreShop';
 import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 import AddReviews from './pages/Home/AddReviews/AddReviews';
+import Purchase from './pages/Purchase/Purchase';
 function App() {
   return (
     <div className="App">
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <PrivateRoute exact path="/addReviews">
               <AddReviews></AddReviews>
+            </PrivateRoute>
+            <PrivateRoute path="/buyNow/:_id">
+              <Purchase></Purchase>
             </PrivateRoute>
             <Route exact path="*">
               <NotFound></NotFound>
