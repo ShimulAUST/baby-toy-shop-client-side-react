@@ -19,12 +19,14 @@ import Logout from '@mui/icons-material/Logout';
 import { Dashboard, Payment, Reviews } from '@mui/icons-material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const Navigation = () => {
-    const { user, logout } = useAuth();
+    const { user, logout, admin } = useAuth();
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -46,6 +48,7 @@ const Navigation = () => {
                     </Typography>
                     <NavLink style={{ textDecoration: "none", color: 'white' }} to="/exploreShop"><Button color="inherit">Explore Shop</Button></NavLink>
                     {
+
                         user?.email ?
                             <Box>
 
@@ -56,78 +59,157 @@ const Navigation = () => {
                                         </IconButton>
                                     </Tooltip>
                                 </Box>
-                                <Menu
-                                    anchorEl={anchorEl}
-                                    open={open}
-                                    onClose={handleClose}
-                                    onClick={handleClose}
-                                    PaperProps={{
-                                        elevation: 0,
-                                        sx: {
-                                            overflow: 'visible',
-                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                            mt: 1.5,
-                                            '& .MuiAvatar-root': {
-                                                width: 32,
-                                                height: 32,
-                                                ml: -0.5,
-                                                mr: 1,
+
+                                {
+                                    admin && < Menu
+                                        anchorEl={anchorEl}
+                                        open={open}
+                                        onClose={handleClose}
+                                        onClick={handleClose}
+                                        PaperProps={{
+                                            elevation: 0,
+                                            sx: {
+                                                overflow: 'visible',
+                                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                                mt: 1.5,
+                                                '& .MuiAvatar-root': {
+                                                    width: 32,
+                                                    height: 32,
+                                                    ml: -0.5,
+                                                    mr: 1,
+                                                },
+                                                '&:before': {
+                                                    content: '""',
+                                                    display: 'block',
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    right: 14,
+                                                    width: 10,
+                                                    height: 10,
+                                                    bgcolor: 'background.paper',
+                                                    transform: 'translateY(-50%) rotate(45deg)',
+                                                    zIndex: 0,
+                                                },
                                             },
-                                            '&:before': {
-                                                content: '""',
-                                                display: 'block',
-                                                position: 'absolute',
-                                                top: 0,
-                                                right: 14,
-                                                width: 10,
-                                                height: 10,
-                                                bgcolor: 'background.paper',
-                                                transform: 'translateY(-50%) rotate(45deg)',
-                                                zIndex: 0,
+                                        }}
+                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    >
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <Dashboard fontSize="small" />
+                                            </ListItemIcon>
+                                            Dashboard
+
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <AddShoppingCartIcon fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='/manageOrders'>  Manage Orders</Link>
+                                        </MenuItem>
+                                        <Divider />
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <PersonAdd fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='/makeAdmin'>  Make Admin </Link>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <Payment fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='#'> Add A Product</Link>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <Reviews fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='/addReviews'> Manage Products</Link>
+                                        </MenuItem>
+                                        <MenuItem onClick={logout}>
+                                            <ListItemIcon>
+                                                <Logout fontSize="small" />
+                                            </ListItemIcon>
+                                            Logout
+                                        </MenuItem>
+                                    </Menu>
+                                }
+                                {
+                                    !admin && < Menu
+                                        anchorEl={anchorEl}
+                                        open={open}
+                                        onClose={handleClose}
+                                        onClick={handleClose}
+                                        PaperProps={{
+                                            elevation: 0,
+                                            sx: {
+                                                overflow: 'visible',
+                                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                                mt: 1.5,
+                                                '& .MuiAvatar-root': {
+                                                    width: 32,
+                                                    height: 32,
+                                                    ml: -0.5,
+                                                    mr: 1,
+                                                },
+                                                '&:before': {
+                                                    content: '""',
+                                                    display: 'block',
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    right: 14,
+                                                    width: 10,
+                                                    height: 10,
+                                                    bgcolor: 'background.paper',
+                                                    transform: 'translateY(-50%) rotate(45deg)',
+                                                    zIndex: 0,
+                                                },
                                             },
-                                        },
-                                    }}
-                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                >
-                                    <MenuItem>
-                                        <ListItemIcon>
-                                            <Dashboard fontSize="small" />
-                                        </ListItemIcon>
-                                        Dashboard
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <ListItemIcon>
-                                            <AddShoppingCartIcon fontSize="small" />
-                                        </ListItemIcon>
-                                        My Orders
-                                    </MenuItem>
-                                    <Divider />
-                                    <MenuItem>
-                                        <ListItemIcon>
-                                            <PersonAdd fontSize="small" />
-                                        </ListItemIcon>
-                                        Add another account
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <ListItemIcon>
-                                            <Payment fontSize="small" />
-                                        </ListItemIcon>
-                                        Payment
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <ListItemIcon>
-                                            <Reviews fontSize="small" />
-                                        </ListItemIcon>
-                                        <Link to='/addReviews'> Add Review</Link>
-                                    </MenuItem>
-                                    <MenuItem onClick={logout}>
-                                        <ListItemIcon>
-                                            <Logout fontSize="small" />
-                                        </ListItemIcon>
-                                        Logout
-                                    </MenuItem>
-                                </Menu>
+                                        }}
+                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    >
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <Dashboard fontSize="small" />
+                                            </ListItemIcon>
+                                            Dashboard
+
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <AddShoppingCartIcon fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='/myOrders'>  My Orders</Link>
+                                        </MenuItem>
+                                        <Divider />
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <PersonAdd fontSize="small" />
+                                            </ListItemIcon>
+                                            Add another account
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <Payment fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='/payments'> Payment</Link>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemIcon>
+                                                <Reviews fontSize="small" />
+                                            </ListItemIcon>
+                                            <Link to='/addReviews'> Add Review</Link>
+                                        </MenuItem>
+                                        <MenuItem onClick={logout}>
+                                            <ListItemIcon>
+                                                <Logout fontSize="small" />
+                                            </ListItemIcon>
+                                            Logout
+                                        </MenuItem>
+                                    </Menu>
+                                }
                             </Box>
 
                             :
@@ -135,7 +217,7 @@ const Navigation = () => {
                     }
                 </Toolbar>
             </AppBar>
-        </Box>
+        </Box >
     );
 };
 

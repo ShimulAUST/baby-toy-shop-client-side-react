@@ -6,10 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import './Product.css';
 const Product = ({ product }) => {
     const { _id, name, price, description, img } = product;
     return (
-        <div style={{ marginTop: '5%' }}>
+        <div style={{ marginTop: '5%' }} className="product-card">
 
             <Card >
                 <CardMedia
@@ -31,7 +32,7 @@ const Product = ({ product }) => {
                 </CardContent>
                 <CardActions>
                     <Link to={`/buyNow/${_id}`}>
-                        <Button sx={{ width: '100%' }} variant="contained">Buy Now</Button>
+                        <Button variant="contained">Buy Now</Button>
                     </Link>
 
                 </CardActions>

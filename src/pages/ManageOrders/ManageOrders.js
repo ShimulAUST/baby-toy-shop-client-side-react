@@ -1,16 +1,17 @@
-import { Button, Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+
+import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 
-const MyOrders = () => {
+const ManageOrders = () => {
     const { user } = useAuth();
     const [orders, setOrders] = useState([]);
     useEffect(() => {
         fetch('https://calm-reaches-59918.herokuapp.com/orders')
             .then(res => res.json())
-            .then(data => setOrders(data.filter(dd => dd.email === user.email)));
+            .then(data => setOrders(data));
     }, [orders, user]);
     let count = 1;
     const handleDelete = id => {
@@ -32,11 +33,28 @@ const MyOrders = () => {
                     })
             }
         }
-
-    }
+    };
+    const handleUpdateOrders = id => {
+        const url = `https://calm-reaches-59918.herokuapp.com/orders/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(orders)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    alert('Updated Successfully');
+                    const remaining = orders;
+                    setOrders(remaining);
+                }
+                console.log(data);
+            })
+    };
     return (
         <div>
-
             <Navigation></Navigation>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={12}>
@@ -70,7 +88,9 @@ const MyOrders = () => {
                                         <TableCell >{row.phone}</TableCell>
                                         <TableCell >{row.address}</TableCell>
                                         <TableCell >{row.status}</TableCell>
-                                        <TableCell ><Button variant="contained" color="error" onClick={() => handleDelete(row._id)}>Delete</Button></TableCell>
+                                        <TableCell ><Button variant="contained" color="error" onClick={() => handleDelete(row._id)}>Delete</Button>
+                                            <br /><Button style={{ marginTop: "1%" }} variant="contained" color="info" onClick={() => handleUpdateOrders(row._id)}>Update Status</Button>
+                                        </TableCell>
 
                                     </TableRow>
                                 ))}
@@ -80,8 +100,8 @@ const MyOrders = () => {
                 </Grid>
             </Grid>
             <Footer></Footer>
-        </div >
+        </div>
     );
 };
 
-export default MyOrders;
+export default ManageOrders;

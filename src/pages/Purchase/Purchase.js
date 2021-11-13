@@ -61,7 +61,7 @@ const Purchase = () => {
                         <h2>Details</h2>
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                            <input {...register("serviceId")} value={_id || ''} readOnly hidden />
+                            <input {...register("productId")} value={_id || ''} readOnly hidden />
                             <input {...register("name", { required: true, maxLength: 30 })} value={user.displayName || ''} />
                             <input {...register("email", { required: true, maxLength: 30 })} value={user.email || ''} />
                             <input {...register("status")} value="pending" readOnly />

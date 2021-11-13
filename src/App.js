@@ -13,6 +13,11 @@ import ExploreShop from './pages/ExploreShop/ExploreShop';
 import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 import AddReviews from './pages/Home/AddReviews/AddReviews';
 import Purchase from './pages/Purchase/Purchase';
+import MyOrders from './pages/MyOrders/MyOrders';
+import Payment from './pages/Payment/Payment';
+import AdminRoute from './pages/Login/AdminRoute/AdminRoute';
+import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
+import ManageOrders from './pages/ManageOrders/ManageOrders';
 function App() {
   return (
     <div className="App">
@@ -40,6 +45,18 @@ function App() {
             <PrivateRoute path="/buyNow/:_id">
               <Purchase></Purchase>
             </PrivateRoute>
+            <PrivateRoute path="/myOrders">
+              <MyOrders></MyOrders>
+            </PrivateRoute>
+            <PrivateRoute path="/payments">
+              <Payment></Payment>
+            </PrivateRoute>
+            <AdminRoute path="/makeAdmin">
+              <MakeAdmin></MakeAdmin>
+            </AdminRoute>
+            <AdminRoute exact path="/manageOrders">
+              <ManageOrders></ManageOrders>
+            </AdminRoute>
             <Route exact path="*">
               <NotFound></NotFound>
             </Route>
