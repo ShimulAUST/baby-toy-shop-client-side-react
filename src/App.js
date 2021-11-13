@@ -18,6 +18,8 @@ import Payment from './pages/Payment/Payment';
 import AdminRoute from './pages/Login/AdminRoute/AdminRoute';
 import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 import ManageOrders from './pages/ManageOrders/ManageOrders';
+import AddProduct from './pages/AddProduct/AddProduct';
+import ManageProducts from './pages/ManageProducts/ManageProducts';
 function App() {
   return (
     <div className="App">
@@ -51,11 +53,17 @@ function App() {
             <PrivateRoute path="/payments">
               <Payment></Payment>
             </PrivateRoute>
-            <AdminRoute path="/makeAdmin">
+            <AdminRoute exact path="/makeAdmin">
               <MakeAdmin></MakeAdmin>
+            </AdminRoute>
+            <AdminRoute exact path="/addProducts">
+              <AddProduct></AddProduct>
             </AdminRoute>
             <AdminRoute exact path="/manageOrders">
               <ManageOrders></ManageOrders>
+            </AdminRoute>
+            <AdminRoute exact path="/manageProducts">
+              <ManageProducts></ManageProducts>
             </AdminRoute>
             <Route exact path="*">
               <NotFound></NotFound>

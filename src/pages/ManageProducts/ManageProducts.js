@@ -5,19 +5,19 @@ import useAuth from '../../hooks/useAuth';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 
-const ManageOrders = () => {
+const ManageProducts = () => {
     const { user } = useAuth();
-    const [orders, setOrders] = useState([]);
+    const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://calm-reaches-59918.herokuapp.com/orders')
+        fetch('https://calm-reaches-59918.herokuapp.com/products')
             .then(res => res.json())
-            .then(data => setOrders(data));
-    }, [orders, user]);
+            .then(data => setProducts(data));
+    }, [products, user]);
     let count = 1;
     const handleDelete = id => {
         if (id) {
-            if (window.confirm("Are you sure to delete this order?")) {
-                const url = `https://calm-reaches-59918.herokuapp.com/orders/${id}`;
+            if (window.confirm("Are you sure to delete this product?")) {
+                const url = `https://calm-reaches-59918.herokuapp.com/products/${id}`;
                 fetch(url, {
                     method: 'DELETE'
                 })
@@ -26,32 +26,13 @@ const ManageOrders = () => {
                         console.log(data);
                         if (data.deletedCount) {
                             alert("successfully Deleted");
-                            const remaining = orders.filter(order => order._id !== id);
-                            setOrders(remaining);
+                            const remaining = products.filter(product => product._id !== id);
+                            setProducts(remaining);
                         }
 
                     })
             }
         }
-    };
-    const handleUpdateOrders = id => {
-        const url = `https://calm-reaches-59918.herokuapp.com/orders/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(orders)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    alert('Updated Successfully');
-                    const remaining = orders;
-                    setOrders(remaining);
-                }
-                console.log(data);
-            })
     };
     return (
         <div>
@@ -59,22 +40,20 @@ const ManageOrders = () => {
             <Grid container spacing={2}>
                 <Grid item xs={12} md={12}>
                     <TableContainer component={Paper} style={{ paddingTop: '5%', paddingBottom: '5%' }}>
-                        <Typography variant="h4">All Orders</Typography>
+                        <Typography variant="h4">All Products</Typography>
                         <Table aria-label="simple table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Serial No</TableCell>
                                     <TableCell >Product Id</TableCell>
-                                    <TableCell>Customer Name</TableCell>
-                                    <TableCell>Customer Email</TableCell>
-                                    <TableCell>Customer Phone</TableCell>
-                                    <TableCell>Customer Address</TableCell>
-                                    <TableCell>Status</TableCell>
+                                    <TableCell>Product Name</TableCell>
+                                    <TableCell>Product Description</TableCell>
+                                    <TableCell>Product Price</TableCell>
                                     <TableCell>Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {orders.map((row) => (
+                                {products.map((row) => (
                                     <TableRow
                                         key={row._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -82,14 +61,11 @@ const ManageOrders = () => {
                                         <TableCell component="th" scope="row">
                                             {count++}
                                         </TableCell>
-                                        <TableCell >{row.productId}</TableCell>
+                                        <TableCell >{row._id}</TableCell>
                                         <TableCell >{row.name}</TableCell>
-                                        <TableCell >{row.email}</TableCell>
-                                        <TableCell >{row.phone}</TableCell>
-                                        <TableCell >{row.address}</TableCell>
-                                        <TableCell >{row.status}</TableCell>
+                                        <TableCell >{row.description}</TableCell>
+                                        <TableCell >{row.price}</TableCell>
                                         <TableCell ><Button variant="contained" color="error" onClick={() => handleDelete(row._id)}>Delete</Button>
-                                            <br /><Button style={{ marginTop: "1%" }} variant="contained" color="info" onClick={() => handleUpdateOrders(row._id)}>Update Status</Button>
                                         </TableCell>
 
                                     </TableRow>
@@ -100,8 +76,9 @@ const ManageOrders = () => {
                 </Grid>
             </Grid>
             <Footer></Footer>
+
         </div>
     );
 };
 
-export default ManageOrders;
+export default ManageProducts;

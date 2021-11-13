@@ -18,6 +18,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Logout from '@mui/icons-material/Logout';
 import { Dashboard, Payment, Reviews } from '@mui/icons-material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import './Navigation.css';
 const Navigation = () => {
     const { user, logout, admin } = useAuth();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -31,7 +32,7 @@ const Navigation = () => {
         setAnchorEl(null);
     };
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} >
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -50,7 +51,7 @@ const Navigation = () => {
                     {
 
                         user?.email ?
-                            <Box>
+                            <Box className="navigation-bar">
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <Tooltip title="Account settings">
@@ -62,6 +63,7 @@ const Navigation = () => {
 
                                 {
                                     admin && < Menu
+                                        className="navigation-bar"
                                         anchorEl={anchorEl}
                                         open={open}
                                         onClose={handleClose}
@@ -119,13 +121,13 @@ const Navigation = () => {
                                             <ListItemIcon>
                                                 <Payment fontSize="small" />
                                             </ListItemIcon>
-                                            <Link to='#'> Add A Product</Link>
+                                            <Link to='/addProducts'> Add A Product</Link>
                                         </MenuItem>
                                         <MenuItem>
                                             <ListItemIcon>
                                                 <Reviews fontSize="small" />
                                             </ListItemIcon>
-                                            <Link to='/addReviews'> Manage Products</Link>
+                                            <Link to='/manageProducts'> Manage Products</Link>
                                         </MenuItem>
                                         <MenuItem onClick={logout}>
                                             <ListItemIcon>
@@ -137,6 +139,7 @@ const Navigation = () => {
                                 }
                                 {
                                     !admin && < Menu
+                                        className="navigation-bar"
                                         anchorEl={anchorEl}
                                         open={open}
                                         onClose={handleClose}
@@ -184,12 +187,7 @@ const Navigation = () => {
                                             <Link to='/myOrders'>  My Orders</Link>
                                         </MenuItem>
                                         <Divider />
-                                        <MenuItem>
-                                            <ListItemIcon>
-                                                <PersonAdd fontSize="small" />
-                                            </ListItemIcon>
-                                            Add another account
-                                        </MenuItem>
+
                                         <MenuItem>
                                             <ListItemIcon>
                                                 <Payment fontSize="small" />
